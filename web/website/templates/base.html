@@ -1,0 +1,72 @@
+{% spaceless %}
+
+  {% load i18n static %}
+  {% load website carbondesign %}
+
+  {% captureas title_content %}{% spaceless %}
+    {% block head_title %}{% endblock %}
+  {% endspaceless %}{% endcaptureas %}
+
+<!DOCTYPE html>
+{% endspaceless %}
+<html {% block html_attrs %}{% endblock %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  {% spaceless %}
+    <title>
+      {% if title_content %}{{ title_content }} - {% endif %}
+      {{ request.site.name }}
+    </title>
+  {% endspaceless %}
+  <link rel="shortcut icon" href="/favicon.ico">
+  {% block head_meta %}{% endblock %}
+  {% carbondesign_assets %}
+  {% block head_styles %}{% endblock %}
+  <script src="{{STATIC_URL}}jsi18n/{{ LANGUAGE_CODE }}/djangojs.js"></script>
+  {% block head_scripts %}{% javascripts %}{% endblock %}
+</head>
+<body class="{% block body_classes %}{% endblock %}">
+  {% block body %}
+    {% url 'home' as url %}
+    {% UiShell label=request.site.name href=url %}
+      {% Slot 'navigation' %}
+        {% block navigation_app %}{% endblock %}
+        {% block navigation_all_apps %}{% endblock %}
+        {% block navigation_site %}{% endblock %}
+        {% block navigation_user %}{% endblock %}
+      {% endSlot %}
+
+      {% Slot 'links' %}
+        {% block links %}{% endblock %}
+      {% endSlot %}
+
+      {% Slot 'actions' id="uishell-actions" %}{% endSlot %}
+
+      {% for msg in messages %}
+        {% Notification mode='toast' variant=msg.level %}
+          {% NotificationSubtitle %}
+            {{msg.message}}
+          {% endNotificationSubtitle %}
+        {% endNotification %}
+      {% endfor %}
+
+      {% Grid id="js_app" %}
+        {% block breadcrumb %}{% endblock %}
+        {% block banner %}{% endblock %}
+
+        {% block content %}
+          {% Row tag="main" id="main-content" %}
+            {% Col %}<p>Under construction.</p>{% endCol %}
+          {% endRow %}
+        {% endblock %}
+      {% endGrid %}
+
+      {% block extra_body %}{% endblock %}
+    {% endUiShell %}
+  {% endblock %}
+  {% block footer %}{% endblock %}
+  <div id="js_modal-1">{% block jsmodal_1 %}{% endblock %}</div>
+  <div id="js_modal-2">{% block jsmodal_2 %}{% endblock %}</div>
+  {% block inline_js %}{% endblock %}
+</body>

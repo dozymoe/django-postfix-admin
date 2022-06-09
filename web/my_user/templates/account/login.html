@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n carbondesign account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block content %}
+	{% Row id="main-content" %}
+    {% Col %}
+      <h1>{% trans "Sign In" %}</h1>
+    {% endCol %}
+  {% endRow %}
+
+  {% Row %}
+		{% get_providers as socialaccount_providers %}
+		{% if socialaccount_providers %}
+			{% Col %}
+				<p>
+					{% blocktrans with site.name as site_name %}
+						Please sign in with one of your existing third party accounts. Or,
+						<a href="{{ signup_url }}">sign up</a> for a {{ site_name }}
+						account and sign in below:
+					{% endblocktrans %}
+				</p>
+
+				<div class="socialaccount_ballot">
+					<ul class="socialaccount_providers">
+						{% include "socialaccount/snippets/provider_list.html" with process="login" %}
+					</ul>
+
+					<div class="login-or">{% trans 'or' %}</div>
+				</div>
+
+				{% include "socialaccount/snippets/login_extra.html" %}
+      {% endCol %}
+		{% else %}
+      {% Col %}
+				<p>
+					{% blocktrans %}
+						If you have not created an account yet, then please
+						<a href="{{ signup_url }}">sign up</a> first.
+					{% endblocktrans %}
+				</p>
+      {% endCol %}
+		{% endif %}
+	{% endRow %}
+
+  {% Row tag="main" %}
+    {% Col tag="form" class="login" method="POST" %}
+			{% csrf_token %}
+
+			{% if redirect_field_value %}
+				<input type="hidden" name="{{ redirect_field_name }}"
+						value="{{ redirect_field_value }}" />
+			{% endif %}
+
+			<div class="form-group">
+				{% TextInput form.login %}
+			</div>
+
+			<div class="form-group">
+				{% TextInput form.password %}
+			</div>
+
+			<div class="form-group">
+				{% CheckBox form.remember %}
+			</div>
+
+      {% if form.errors %}
+        <div class="form-group">{{form.errors}}</div>
+      {% endif %}
+
+      <div class="form-actions">
+				{% url 'account_reset_password' as url %}
+				{% Button tag="a" href=url %}
+					{% trans "Forgot Password?" %}
+				{% endButton %}
+
+				{% Button type="submit" %}
+					{% trans "Sign In" %}
+				{% endButton %}
+      </div>
+		{% endCol %}
+  {% endRow %}
+{% endblock %}

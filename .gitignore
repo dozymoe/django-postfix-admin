@@ -21,6 +21,11 @@
 *.pyc
 
 
+## runit
+
+supervise/
+
+
 ## waf
 
 /.BUILD/

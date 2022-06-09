@@ -1,2 +1,9 @@
+cryptography
 django
+django-allauth
+django-carbondesign
+django-mailer
+passlib
 pybuildtool
+rules
+uvicorn

@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-09 21:39+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: my_user/templates/account/login.html:4
+#: my_user/templates/account/login.html:10
+#: my_user/templates/account/login.html:80
+msgid "Sign In"
+msgstr ""
+
+#: my_user/templates/account/login.html:19
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t\t\tPlease sign in with one of your existing third party accounts. "
+"Or,\n"
+"\t\t\t\t\t\t<a href=\"%(signup_url)s\">sign up</a> for a %(site_name)s\n"
+"\t\t\t\t\t\taccount and sign in below:\n"
+"\t\t\t\t\t"
+msgstr ""
+
+#: my_user/templates/account/login.html:31
+msgid "or"
+msgstr ""
+
+#: my_user/templates/account/login.html:39
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t\t\tIf you have not created an account yet, then please\n"
+"\t\t\t\t\t\t<a href=\"%(signup_url)s\">sign up</a> first.\n"
+"\t\t\t\t\t"
+msgstr ""
+
+#: my_user/templates/account/login.html:76
+msgid "Forgot Password?"
+msgstr ""
+
+#: my_user/templates/account/password_reset.html:4
+#: my_user/templates/account/password_reset.html:10
+msgid "Password Reset"
+msgstr ""
+
+#: my_user/templates/account/password_reset.html:20
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: my_user/templates/account/password_reset.html:34
+msgid "Reset My Password"
+msgstr ""
+
+#: my_user/templates/account/password_reset.html:43
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: my_user/templates/account/signup.html:4
+#: my_user/templates/account/signup.html:10
+msgid "Signup"
+msgstr ""
+
+#: my_user/templates/account/signup.html:17
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: my_user/templates/account/signup.html:52
+msgid "Sign Up"
+msgstr ""

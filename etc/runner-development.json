@@ -20,6 +20,15 @@
   "configuration": {
     "development": {
       "web": {
+        "shell_env": {
+          "CONFIG_FILENAMES": [
+            "etc/development/logging.json",
+            "etc/development/web/account.json",
+            "etc/development/web/application.json",
+            "etc/development/web/database.json",
+            "etc/development/web/server.json"
+          ]
+        }
       }
     }
   }

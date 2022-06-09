@@ -18,5 +18,22 @@ Setup
 check ./etc/ for configuration
 check ./var/runit/ for example of running as a service
 
+    > ./run waf
+    > ./run django-manage --project=web migrate
+
+need to create Django site that matches your server hostname
+
+    > ./run django-manage shell
+    > > from django.contrib.sites.models import Site
+    > > site = Site.objects.all()[0]
+    > > site.domain = '127.0.0.2'
+    > > site.name = "My Mail Server"
+    > > site.save()
+    > > quit
+
+create admin user
+
+    > ./run django-manage createsuperuser
+
 you need to create your own ./etc/runner-VARIANT.json and all the files that
 look like ./\*-VARIANT*

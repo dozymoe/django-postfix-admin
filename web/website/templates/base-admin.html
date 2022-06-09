@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n carbondesign %}
+
+{% block navigation_user %}
+  {% UiNavSection %}
+    {% if user.is_authenticated %}
+      {% url 'account_logout' as url %}
+      {% UiNavItem href=url %}
+        {% trans "Sign Out" %}
+      {% endUiNavItem %}
+    {% else %}
+      {% url 'account_login' as url %}
+      {% UiNavItem href=url %}
+        {% trans "Sign In" %}
+      {% endUiNavItem %}
+    {% endif %}
+  {% endUiNavSection %}
+{% endblock %}
