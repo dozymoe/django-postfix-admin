@@ -1,0 +1,103 @@
+web:
+  options:
+    pylint_config_file: etc/pylint.rc
+    pylint_work_dir: "{_1}/"
+
+  mail_alias:
+    pylint:
+      raw_file_in: "{_1}/{_2}/**/*.py"
+      raw_depend_in: etc/pylint.rc
+
+  mail_domain:
+    pylint:
+      raw_file_in: "{_1}/{_2}/**/*.py"
+      raw_depend_in: etc/pylint.rc
+
+  mail_user:
+    pylint:
+      raw_file_in: "{_1}/{_2}/**/*.py"
+      raw_depend_in: etc/pylint.rc
+
+  my_user:
+    pylint:
+      raw_file_in: "{_1}/{_2}/**/*.py"
+      raw_depend_in: etc/pylint.rc
+
+  web:
+    pylint:
+      raw_file_in: "{_1}/{_2}/**/*.py"
+      raw_depend_in: etc/pylint.rc
+
+  website:
+    pylint:
+      raw_file_in: "{_1}/{_2}/**/*.py"
+      raw_depend_in: etc/pylint.rc
+
+
+  collectstatic:
+    shell:
+      options:
+        command: ./run django-manage --project={_1} collectstatic --no-input
+      raw_depend_in:
+        - python_modules/django/contrib/admin/static/**/*
+
+
+  unit_test:
+    shell:
+      options:
+        command: ./run django-manage --project={_1} test --testrunner="test_runner.UnitTestRunner"
+      rule_in:
+        - "{_1}/mail_alias/pylint"
+        - "{_1}/mail_domain/pylint"
+        - "{_1}/mail_user/pylint"
+        - "{_1}/my_user/pylint"
+        - "{_1}/web/pylint"
+        - "{_1}/website/pylint"
+
+  check_migration:
+    shell:
+      options:
+        command: ./run django-manage --project={_1} makemigrations --check --dry-run
+      rule_in:
+        - "{_1}/unit_test/shell"
+
+  integration_test:
+    shell:
+      options:
+        command: ./run django-manage --project={_1} test --testrunner="test_runner.IntegrationTestRunner"
+      rule_in:
+        - "{_1}/check_migration/shell"
+
+
+  py_makemessages:
+    shell:
+      options:
+        command: ./run django-manage --project={_1} makemessages --symlinks -l id -i '*.virtualenv*'
+      rule_in:
+        - "{_1}/unit_test/shell"
+      raw_depend_in:
+        - lib/misc/locale/**/*.po
+        - "{_1}/*/templates/**/*.html"
+
+  compilemessages:
+    shell:
+      options:
+        command: ./run django-admin --project={_1} compilemessages -i '*.virtualenv*'
+      rule_in:
+        - "{_1}/py_makemessages/shell"
+      raw_depend_in:
+        - "{_1}/**/*.po"
+
+
+  runit_sv:
+    options:
+      command: restart
+      target: "{{HOME}}/service/django-postfix-admin-web/"
+      wait_sec: 120
+      force: true
+    rule_in:
+      - "{_1}/compilemessages/shell"
+    raw_depend_in:
+      - etc/runner-{{PROJECT_VARIANT}}.json
+      - etc/{{PROJECT_VARIANT}}/*.json
+      - etc/{{PROJECT_VARIANT}}/{_1}/*.json

@@ -1,0 +1,29 @@
+/public/
+/tmp/
+/var/
+
+
+## fireh_runner
+
+/etc/runner.json
+
+
+## git
+
+*.orig
+
+
+## python
+
+/.virtualenv/
+/python_modules
+/requirements.txt
+*.pyc
+
+
+## waf
+
+/.BUILD/
+/.lock-waf*
+/build.yml
+/wscript

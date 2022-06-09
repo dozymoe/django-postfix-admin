@@ -1,0 +1,26 @@
+{
+  "modules": [
+    "modules.setup",
+    "modules.python",
+    "modules.virtualenv",
+    "modules.waf",
+    "modules.django"
+  ],
+  "setup_modules": [
+    "setup_modules.python",
+    "setup_modules.pybuildtool"
+  ],
+
+  "python_version": "3.9",
+  "waf_version": "2.0.23",
+
+  "default_project": "web",
+  "default_variant": "development",
+
+  "configuration": {
+    "development": {
+      "web": {
+      }
+    }
+  }
+}
